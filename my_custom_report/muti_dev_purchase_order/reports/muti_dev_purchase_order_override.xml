@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- Inherit and override the original invoice report -->
+        <report 
+       string="Purchase Order Report" 
+       id="purchase.action_report_purchase_order" 
+       model="purchase.order" 
+       report_type="qweb-pdf"
+       name="muti_dev_purchase_order.muti_dev_purchase_order_template_doc" 
+       file="Purchase Order " 
+/></odoo>

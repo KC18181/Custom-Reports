@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="muti_paperformat_purchase_order" model="report.paperformat">
+        <field name="name">Purchase Order</field>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">30.00</field>
+        <field name="margin_bottom">35.00</field>
+        <field name="margin_left">15.00</field>
+        <field name="margin_right">15.00</field>
+    </record>
+
+    <record id="muti_sales_invoice_pos_report" model="ir.actions.report">
+            <field name="name">Purchase Order Report</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">muti_dev_purchase_order.muti_dev_purchase_order_template_doc</field>
+            <field name="report_file">muti_dev_purchase_order.muti_dev_purchase_order_template_doc</field>
+            <field name="print_report_name">'Purchase Order Report - %s' % (object.partner_id.name)</field>
+            <field name="paperformat_id" ref="muti_paperformat_purchase_order"/>
+            <field name="attachment"></field>
+            <field name="binding_type">report</field>
+    </record>
+
+    <template id="muti_dev_purchase_order.muti_dev_purchase_order_template_doc">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page" style="position:absolute; font-family:Arial;">
+
+                <!-- Fetch Company Information -->
+                <t t-set="company" t-value="user.company_id"/>
+
+                <!-- Header with Company Info and Logo -->
+                <div class="header" style="position: relative; font-size:12px; font-family:Arial;">
+                    <div class="row" style="font-family: 'Trebuchet MS', sans-serif; position: relative;">
+                        <!-- Company Logo (Absolute Position) -->
+                        <div class="col-2 mb4" style="position: absolute; left: 0; top: 40px;">
+                            <img t-if="doc.company_id.logo" 
+                                 t-att-src="image_data_uri(doc.company_id.logo)" 
+                                 t-att-width="250" t-att-height="90" 
+                                 alt="Company Logo"/>
+                        </div>
+
+                        <!-- Company Address (Absolute Position, Right) -->
+                        <div t-if="doc.company_id.name == 'MUTI'" class="col-5 mb4 text-right" style="position: absolute; right: 0; top: 50px; font-size: 14px; text-align: right;">
+                            <p style="font-weight:bold; margin: 0;">MUTI</p>
+                            <p style="margin: 0;">Koronadal City, South Cotabato</p>
+                            <p style="margin: 0;">Philippines</p>
+                        </div>
+
+                        <div t-if="doc.company_id.name == 'HSI'" class="col-5 mb4 text-right" style="position: absolute; right: 0; top: 50px; font-size: 14px; text-align: right;">
+                            <p style="font-weight:bold; margin: 0;">HSI</p>
+                            <p style="margin: 0;">Gensan Drive</p>
+                            <p style="margin: 0;">Koronadal City, South Cotabato</p>
+                            <p style="margin: 0;">Philippines</p>
+                        </div>
+
+                        <div t-if="doc.company_id.name == 'EPFC'" class="col-5 mb4 text-right" style="position: absolute; right: 0; top: 50px; font-size: 14px; text-align: right;">
+                            <p style="font-weight:bold; margin: 0;">EPFC</p>
+                            <p style="margin: 0;">MUTI Bldg., Osmeña St.</p>
+                            <p style="margin: 0;">Panabo City, Koronadal City, South Cotabato</p>
+                            <p style="margin: 0;">Philippines</p>
+                        </div>
+                    </div>
+                    <!-- Horizontal Line after Header -->
+                </div>
+                    <div class="row" style="margin-top: 20px; width: 100%; text-align: right; font-size:16px;">
+                    <hr style=" margin-bottom: 20px; border: 2px solid black; width: 100%; text-align: center; margin: 0"/>
+                     <table class="table table-sm" style="margin-top: 20px; width: 100%">
+                            <thead>
+                                <tr>
+                                    <th style="margin: 10px; text-align: left; font-size:16px; width: 50%">
+                                        <strong>Shipping Address:</strong>
+                                    </th>
+                                    <th style="margin: 10px; text-align: right; font-size:16px; width: 50%">
+                                        <strong>Vendor Address:</strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <!-- Shipping Address from Warehouse -->
+                                    <td style="margin: 15px; text-align: left; width: 50%">
+                                        <p t-if="doc.picking_type_id.warehouse_id">
+                                            <t t-esc="doc.picking_type_id.warehouse_id.name"/> <!-- Warehouse Name -->
+                                            <span t-field="doc.picking_type_id.warehouse_id.partner_id"
+                                                t-options='{"widget": "contact", "fields": ["address", "name", "phone", "email"], "no_marker": True, "phone_icons": True}'/>
+                                        </p>
+                                    </td>
+
+                                    <!-- Vendor Address -->
+                                    <td style="margin: 15px; text-align: right; width: 50%">
+                                        <span t-field="doc.partner_id"
+                                            t-options='{"widget": "contact", "fields": ["address", "name", "phone", "email"], "no_marker": True, "phone_icons": True}'/>
+                                        <p t-if="doc.partner_id.vat">
+                                            <t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>: 
+                                            <span t-field="doc.partner_id.vat"/>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h2 style="text-align: left; color: red;" t-if="doc.state == 'draft'">Request for Quotation #<span style="color: red;" t-field="doc.name"/></h2>
+                        <h2 style="text-align: left; color: red;" t-if="doc.state in ['sent', 'to approve']">Purchase Order #<span style="color: red;" t-field="doc.name"/></h2>
+                        <h2 style="text-align: left; color: red;" t-if="doc.state in ['purchase', 'done']">Purchase Order #<span style="color: red;" t-field="doc.name"/></h2>
+                        <h2 style="text-align: left; color: red;" t-if="doc.state == 'cancel'">Cancelled Purchase Order #<span style="color: red;" t-field="doc.name"/></h2>
+
+                        <table class="table table-sm" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th style="margin: 10px; text-align: left; font-size:16px; width: 25%">
+                                        <strong>Purchase Representative:</strong>
+                                    </th>
+                                    <th style="margin: 10px; text-align: left; font-size:16px; width: 25%">
+                                        <strong>Your Order Reference:</strong>
+                                    </th>
+                                    <th style="margin: 10px; text-align: left; font-size:16px; width: 25%">
+                                        <strong>Order Date:</strong>
+                                    </th>
+                                    <th style="margin: 10px; text-align: left; font-size:16px; width: 25%">
+                                        <strong>Payment Term:</strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <!-- Purchase Representative Field -->
+                                    <td style="margin: 30px; text-align: left; width: 25%">
+                                        <t t-if="doc.user_id">
+                                            <p t-field="doc.user_id" class="m-0"/>
+                                        </t>
+                                        <t t-else="">
+                                            <p class="m-0"> </p> <!-- Regular space for alignment -->
+                                        </t>
+                                    </td>
+
+                                    <!-- Order Reference Field -->
+                                    <td style="margin: 30px; text-align: left; width: 25%">
+                                        <t t-if="doc.partner_ref">
+                                            <p t-field="doc.partner_ref" class="m-0"/>
+                                        </t>
+                                        <t t-else="">
+                                            <p class="m-0"> </p> <!-- Regular space for alignment -->
+                                        </t>
+                                    </td>
+
+                                    <!-- Order Date Field -->
+                                    <td style="margin: 30px; text-align: left; width: 25%">
+                                        <t t-if="doc.date_order">
+                                            <p t-field="doc.date_order" class="m-0"/>
+                                        </t>
+                                        <t t-else="">
+                                            <p class="m-0"> </p> <!-- Regular space for alignment -->
+                                        </t>
+                                    </td>
+
+                                    <!-- Payment Term Field -->
+                                    <td style="margin: 30px; text-align: left; width: 25%">
+                                        <t t-if="doc.payment_term_id">
+                                            <p t-field="doc.payment_term_id" class="m-0"/>
+                                        </t>
+                                        <t t-else="">
+                                            <p class="m-0"> </p> <!-- Regular space for alignment -->
+                                        </t>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                         <table class="table table-sm" style="text-align: left; border: 1px solid black; border-collapse: collapse; width: 100%; margin-bottom: 20px;">
+                            <thead>
+                                <tr style="border: 1px solid black;">
+                                    <th style="border: 1px solid black;" name="th_description"><strong>Description</strong></th>
+                                    <th style="border: 1px solid black;" name="th_taxes"><strong>Taxes</strong></th>
+                                    <th style="border: 1px solid black;" name="th_date_req" class="text-center"><strong>Model</strong></th>
+                                    <th style="border: 1px solid black;" name="th_quantity" class="text-right"><strong>Qty</strong></th>
+                                    <th style="border: 1px solid black;" name="th_price_unit" class="text-right"><strong>Unit Price</strong></th>
+                                    <th style="border: 1px solid black;" name="th_amount" class="text-right"><strong>Amount</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Initialize subtotal and total qty -->
+                                <t t-set="subtotal_qty" t-value="0"/>
+                                <t t-set="total_qty" t-value="0"/>
+
+                                <t t-foreach="doc.order_line" t-as="line">
+                                    <t t-set="subtotal_qty" t-value="subtotal_qty + line.product_qty"/>
+                                    <t t-set="total_qty" t-value="total_qty + line.product_qty"/>
+                                    
+                                    <tr style="border: 1px solid black;" t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                        <t t-if="not line.display_type">
+                                            <td style="border: 1px solid black;" id="product">
+                                                <span t-field="line.name"/>
+                                            </td>
+                                            <td style="border: 1px solid black;" name="td_taxes">
+                                                <span t-esc="', '.join(map(lambda x: x.name, line.taxes_id))"/>
+                                            </td>
+                                            <td style="border: 1px solid black;" class="text-center">
+                                                <span t-field="line.product_id.model"/>
+                                            </td>
+                                            <td style="border: 1px solid black;" class="text-right">
+                                                <span t-field="line.product_qty"/>
+                                                <span t-field="line.product_uom.name" groups="uom.group_uom"/>
+                                            </td>
+                                            <td style="border: 1px solid black;" class="text-right">
+                                                <span t-field="line.price_unit"/>
+                                            </td>
+                                            <td style="border: 1px solid black;" class="text-right">
+                                                <span t-field="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Second Table for Subtotal and Total -->
+                        <div id="total" class="row justify-content-start">
+                            <div class="col-4">
+                                <table class="table table-sm" style="float: right; text-align: right; border: 1px solid black; border-collapse: collapse; width: 50%;">
+                                    <tr class="border-black">
+                                        <td style="text-align: left; border: 1px solid black;" name="td_subtotal_label"><strong>Subtotal</strong></td>
+                                        <td style="border: 1px solid black;" class="text-left">
+                                            <span t-esc="subtotal_qty"/> <!-- Display subtotal quantity -->
+                                        </td>
+                                        <td style="border: 1px solid black;" class="text-left">
+                                            <span t-field="doc.amount_untaxed" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td  style="text-align: left; border: 1px solid black;" name="td_taxes_label">Taxes</td>
+                                         <td>
+                                            <p class="m-0"> </p> <!-- Non-breaking space for alignment -->
+                                        </td>
+                                        <td style="border: 1px solid black;" class="text-left">
+                                            <span t-field="doc.amount_tax" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border: 1px solid black;" class="border-black o_total">
+                                        <td style="background-color: red; color: white; text-align: left;" name="td_amount_total_label"><strong>Total</strong></td>
+                                        <td style="background-color: red; color: white; border: 1px solid black;" class="text-left">
+                                            <span t-esc="total_qty"/> <!-- Display total quantity -->
+                                        </td>
+                                        <td style="background-color: red; color: white; border: 1px solid black;" class="text-left">
+                                            <span t-field="doc.amount_total" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="footer" style="height: 300px; padding-bottom: 200px; font-size:12px; font-family:Arial;">
+                            <!-- Border above Footer -->
+                            <hr style="border: 2px solid black; width: 100%; text-align: center; margin: 0"/>
+                            
+                            <!-- Footer Table for Signatories -->
+                            <div class="row" style="font-family: 'Trebuchet MS', sans-serif; position: relative;">
+                                <table class="table table-sm" style="width: 100%; border-style: hidden;">
+                                    <thead>
+                                        <tr>
+                                            <th style="margin: 10px; text-align: left; font-size:16px;">
+                                                <strong>Prepared By:</strong>
+                                            </th>
+                                            <th style="margin: 10px; text-align: left; font-size:16px;">
+                                                <strong>Checked By:</strong>
+                                            </th>
+                                            <th style="margin: 10px; text-align: left; font-size:16px;">
+                                                <strong>Approved By:</strong>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="margin: 10px; text-align: left;">
+                                                
+                                            </td>
+                                            <td style="margin: 10px; text-align: left;">
+                                            
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                        <tbody>
+                                        <tr>
+                                            <td style="margin: 10px; text-align: left; font-size:16px;">
+                                                <span t-field="doc.user_id"/>
+                                            </td>
+                                            <td style="margin: 10px; text-align: left; font-size:16px;">
+                                                <span t-field="doc.parent_id"/>
+                                            </td>
+                                            <td style="margin: 10px; text-align: left; font-size:16px;">
+                                                <span t-field="doc.coach_id"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                                <hr style="border: 2px solid black; width: 100%; text-align: center; margin: 0"/>
+                                <div style="text-align: center; margin-top: 10px; font-size:14px;">
+                                    <span>Page: </span>
+                                    <span class="page"/>/<span class="topage"/>
+                                </div>  
+                        </div>
+                   </div>
+               </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

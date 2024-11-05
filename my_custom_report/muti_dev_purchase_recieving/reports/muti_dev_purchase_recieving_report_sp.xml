@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="muti_paperformat_purchase_recieving_sp" model="report.paperformat">
+        <field name="name">Purchase Recieving Report - SP</field>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">30.00</field>
+        <field name="margin_bottom">35.00</field>
+        <field name="margin_left">15.00</field>
+        <field name="margin_right">15.00</field>
+    </record>
+
+    <report
+        id="muti_purchase_receiving_report_sp"
+        model="stock.picking"
+        string="Purchase Recieving - SP"
+        report_type="qweb-pdf"
+        name="muti_dev_purchase_recieving.muti_dev_purchase_recieving_sp_template_doc"
+        file="muti_dev_purchase_recieving.muti_dev_purchase_recieving_sp_template_doc"
+        paperformat="muti_paperformat_purchase_recieving_sp"
+        print_report_name="'Purchase Recieving SP - %s' % (object.partner_id.name)"
+    />
+
+    <template id="muti_dev_purchase_recieving.muti_dev_purchase_recieving_sp_template_doc">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <link rel="stylesheet" href="/muti_dev_purchase_recieving/static/src/css/style.css"/>
+            <div class="page" style="position:absolute; font-family:Arial;">
+                
+                <!-- Fetch Company Information -->
+                <t t-set="company" t-value="user.company_id"/>
+
+                <!-- Header with Company Info and Logo -->
+                <div class="header" style="position: relative; font-size:12px; font-family:Arial;">
+                    <div class="row" style="font-family: 'Trebuchet MS', sans-serif; position: relative;">
+                        <!-- Company Logo (Absolute Position) -->
+                        <div class="col-2 mb4" style="position: absolute; left: 0; top: 40px;">
+                            <img t-if="doc.company_id.logo" 
+                                 t-att-src="image_data_uri(doc.company_id.logo)" 
+                                 t-att-width="250" t-att-height="90" 
+                                 alt="Company Logo"/>
+                        </div>
+
+                        <!-- Company Address (Absolute Position, Right) -->
+                        <div t-if="doc.company_id.name == 'MUTI'" class="col-5 mb4 text-right" style="position: absolute; right: 0; top: 50px; font-size: 14px; text-align: right;">
+                            <p style="font-weight:bold; margin: 0;">MUTI</p>
+                            <p style="margin: 0;">Koronadal City, South Cotabato</p>
+                            <p style="margin: 0;">Philippines</p>
+                        </div>
+
+                        <div t-if="doc.company_id.name == 'HSI'" class="col-5 mb4 text-right" style="position: absolute; right: 0; top: 50px; font-size: 14px; text-align: right;">
+                            <p style="font-weight:bold; margin: 0;">HSI</p>
+                            <p style="margin: 0;">Gensan Drive</p>
+                            <p style="margin: 0;">Koronadal City, South Cotabato</p>
+                            <p style="margin: 0;">Philippines</p>
+                        </div>
+
+                        <div t-if="doc.company_id.name == 'EPFC'" class="col-5 mb4 text-right" style="position: absolute; right: 0; top: 50px; font-size: 14px; text-align: right;">
+                            <p style="font-weight:bold; margin: 0;">EPFC</p>
+                            <p style="margin: 0;">MUTI Bldg., Osmeña St.</p>
+                            <p style="margin: 0;">Panabo City, Koronadal City, South Cotabato</p>
+                            <p style="margin: 0;">Philippines</p>
+                        </div>
+                    </div>
+
+                    <!-- Horizontal Line after Header -->
+                    <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                        <div class="col-12">
+                            <div style="border-bottom: 1px solid black;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="border: 2px solid black; width: 100%; text-align: center; margin: 0"/>
+
+                <h2 style="font-weight:bold; text-align: center; margin-top: 20px;">PURCHASE RECEIVING REPORT</h2>
+
+                <!-- Outgoing and Incoming Address Section -->
+                <div class="row" style="margin-top: 40px; width: 100%; text-align: right; font-size:16px;">
+                    <!-- Incoming Address (Left Aligned) -->
+                    <div class="col-5 offset-1" name="div_incoming_address">
+                        <div t-if="doc.picking_type_id.code=='incoming' and doc.partner_id">
+                            <span><strong>Vendor Address:</strong></span>
+                        </div>
+                        <div t-if="doc.picking_type_id.code=='internal' and doc.partner_id">
+                            <span><strong>Warehouse Address:</strong></span>
+                        </div>
+                        <div t-if="doc.picking_type_id.code=='outgoing' and doc.partner_id">
+                            <span><strong>Customer Address:</strong></span>
+                        </div>
+                        <div t-if="doc.partner_id" name="partner_header">
+                            <div t-if="doc.partner_id">
+                                <!-- Company Name -->
+                                <p style="margin: 0;" t-if="doc.partner_id.name">
+                                    <span t-esc="doc.partner_id.name"/>
+                                </p>
+                                <!-- Address (Street, City, Zip, Country) -->
+                                <div t-if="doc.partner_id.contact_address">
+                                    <div t-if="doc.partner_id.contact_address">
+                                        <p style="margin: 0;" t-if="doc.partner_id.street">
+                                            <span t-esc="doc.partner_id.street"/>
+                                        </p>
+                                        <p style="margin: 0;" t-if="doc.partner_id.city">
+                                            <span t-esc="doc.partner_id.city"/>
+                                        </p>
+                                        <p style="margin: 0;" t-if="doc.partner_id.zip">
+                                            <span t-esc="doc.partner_id.zip"/>
+                                        </p>
+                                        <p style="margin: 0;" t-if="doc.partner_id.country_id">
+                                            <span t-esc="doc.partner_id.country_id.name"/>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                             <!-- Phone -->
+                                <p style="margin: 0;" t-if="doc.partner_id.phone">
+                                    <span t-esc="doc.partner_id.phone"/>
+                                </p>
+                            <p style="margin: 0;" t-if="doc.sudo().partner_id.vat">
+                                <t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>: 
+                                <span t-field="doc.sudo().partner_id.vat"/>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Info -->
+                <br/>
+                <h1 t-field="doc.name" class="mt0 float-left" style="color: red;"></h1>
+                <table class="table table-sm" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th style="margin: 10px; text-align: left; font-size:16px;">
+                                <strong>Order:</strong>
+                            </th>
+                            <th style="margin: 10px; text-align: left; font-size:16px;">
+                                <strong>Shipping Date:</strong>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <!-- Order Field -->
+                            <td t-if="doc.origin" style="margin: 30px; text-align: left;">
+                                <span t-field="doc.origin"/>
+                            </td>
+
+                            <!-- Date Field with Margin -->
+                            <td style="margin: 30px; text-align: left;">
+                                <span t-field="doc.date_done"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Render the product lines -->
+                <!-- Render the grouped grand totals -->
+                <table class="table table-sm" t-if="doc.move_line_ids and doc.move_ids_without_package" style="text-align: left; border: 1px solid black; border-collapse: collapse; width: 100%; margin-bottom: 20px;">
+                    <thead>
+                        <tr style="border: 1px solid black;">
+                            <th style="margin: 10px; text-align: left; border: 1px solid black; font-size:16px;">
+                                <strong>Product</strong>
+                            </th>
+                            <th style="margin: 10px; text-align: left; border: 1px solid black; font-size:16px;">
+                                <strong>Ordered Quantity</strong>
+                            </th>
+                            <th style="margin: 10px; text-align: left; border: 1px solid black; font-size:16px;">
+                                <strong>Received Quantity</strong>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Initialize total variables -->
+                        <t t-set="total_ordered_qty" t-value="0"/>
+                        <t t-set="total_received_qty" t-value="0"/>
+
+                        <t t-set="uom_name" t-value="''"/>
+
+                        <t t-foreach="doc.move_ids_without_package" t-as="move">
+                        <t t-foreach="move.move_line_ids.sorted(key=lambda ml: ml.location_id.id)" t-as="ml">
+                            <tr>
+                                <td class="table-cell" style="border: 1px solid black; font-size:16px;">
+                                    <span t-esc="ml.product_id.name"/><br/>
+                                </td>
+                                <td class="table-cell" style="border: 1px solid black; font-size:16px;">
+                                    <span t-field="move.product_uom_qty"/>
+                                    <span t-esc="ml.product_uom_id.name"/>
+                                    <t t-set="uom_name" t-value="ml.product_uom_id.name"/>
+                                    <!-- Add to the ordered total -->
+                                    <t t-set="total_ordered_qty" t-value="total_ordered_qty + move.product_uom_qty"/>
+                                </td>
+                                <td class="table-cell" style="border: 1px solid black; font-size:16px;">
+                                    <span t-field="move.quantity_done"/>
+                                    <span t-esc="ml.product_uom_id.name"/>
+                                    <!-- Add to the received total -->
+                                    <t t-set="total_received_qty" t-value="total_received_qty + move.quantity_done"/>
+                                </td>
+                            </tr>
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+
+                <table class="table table-sm" t-if="doc.move_line_ids and doc.move_ids_without_package" style="text-align: left; border: 1px solid black; border-collapse: collapse; width: 100%; margin-top: 20px;">
+                    <thead>
+                        <tr style="border: 1px solid black;">
+                            <th style="margin: 10px; border: 1px solid black; text-align: left; width: 40%; font-size:16px;">
+                                <strong>Grand Total</strong>
+                            </th>
+                            <th style="margin: 10px; border: 1px solid black; text-align: left; width: 15%; font-size:16px;">
+                                <span t-esc="total_ordered_qty"/>
+                                <span t-esc="uom_name"/>
+                            </th>
+                            <th style="margin: 10px; border: 1px solid black; text-align: left; width: 15%; font-size:16px;">
+                                <span t-esc="total_received_qty"/>
+                                <span t-esc="uom_name"/>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <!-- Footer Section -->
+                <div class="footer" style="position: relative; font-size:12px; font-family:Arial;">
+                    <!-- Border above Footer -->
+                    <hr style="border: 2px solid black; width: 100%; text-align: center; margin: 0"/>
+                    
+                    <!-- Footer Table for Signatories -->
+                    <div class="row" style="font-family: 'Trebuchet MS', sans-serif; position: relative;">
+                        <table class="table table-sm" style="width: 100%; border-style: hidden;">
+                            <thead>
+                                <tr>
+                                    <th style="margin: 20px; text-align: left; font-size:16px;">
+                                        <strong>Prepared By:</strong>
+                                    </th>
+                                    <th style="margin: 20px; text-align: left; font-size:16px;">
+                                        <strong>Approved By:</strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="margin: 10px; text-align: left; font-size:16px;">
+                                        <span t-field="user.name"/>
+                                    </td>
+                                    <td style="margin: 10px; text-align: left; font-size:16 px;">
+                                        <span t-field="user.parent_id.name" t-if="user.parent_id"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Border below Table -->
+                    <hr style="border: 2px solid black; width: 100%; text-align: center; margin: 0"/>
+                    <!-- Page number -->
+                    <div style="text-align: center; font-size:14px;">
+                        <span>Page: </span>
+                        <span class="page"/>/<span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+</template>
+
+</odoo>

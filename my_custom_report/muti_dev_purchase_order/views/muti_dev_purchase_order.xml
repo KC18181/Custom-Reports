@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.user.field</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Correct XPath to locate fiscal_position_id in the 'Other Information' tab -->
+            <xpath expr="//notebook/page[@name='purchase_delivery_invoice']/group/group[@name='invoice_info']/field[@name='fiscal_position_id']" position="after">
+                <!-- Insert the new fields after fiscal_position_id -->
+                <field name="parent_id"/>
+                <field name="coach_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
