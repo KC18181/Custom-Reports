@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+        <record model="ir.ui.view" id="sales_summary_form_views">
+            <field name="name">Sales Summary List Form</field>
+            <field name="model">sales.summary</field>
+            <field name="arch" type="xml">
+                <form string="Sales Cash">
+                   <group col="2">
+                        <group>
+                            <field name="date"/>
+                             <field name="so_number"/>
+                             <field name="area"/>
+                             <field name="branch"/>
+                             <field name="barcode"/>
+                             <field name="brand"/>
+                             <field name="product_category"/>
+                             <field name="standard_description"/>
+                             <field name="usage"/>
+                             <field name="customer"/>
+                             <field name="engine_number"/>
+                             <field name="chassis_number"/>
+                        </group>
+                        <group>
+                             <field name="payment_term"/>
+                             <field name="pricelist"/>
+                             <field name="qty"/>
+                             <field name="cost"/>
+                             <field name="amount"/>
+                             <field name="company"/>
+                             <field name="res_branch_name"/>
+                             <field name="branch_id" invisible="1"/>
+                             <field name="sales_type" invisible="1"/>
+                             <field name="invoice_date"/>
+                             <field name="invoice_name"/>
+                             <field name="invoice_slip"/>
+                             <field name="invoice_state"/>
+                             <field name="company_id" invisible="1"/>
+                             <field name="vendor_id" invisible="1"/>
+                            <field name="vendor_name"/>
+                    </group>
+               </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sales_summary_tree_view">
+        <field name="name">Sales Summary Tree View</field>
+        <field name="model">sales.summary</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+                 <field name="so_number"/>
+                 <field name="area"/>
+                 <field name="branch"/>
+                 <field name="barcode"/>
+                 <field name="brand"/>
+                 <field name="product_category"/>
+                 <field name="standard_description"/>
+                 <field name="usage"/>
+                 <field name="customer"/>
+                 <field name="engine_number"/>
+                 <field name="chassis_number"/>
+                 <field name="payment_term"/>
+                 <field name="pricelist"/>
+                 <field name="qty"/>
+                 <field name="cost"/>
+                 <field name="amount"/>
+                 <field name="company"/>
+                 <field name="res_branch_name"/>
+                 <field name="branch_id" invisible="1"/>
+                 <field name="sales_type" invisible="1"/>
+                 <field name="invoice_date" optional="hide"/>
+                 <field name="invoice_name" optional="hide"/>
+                 <field name="invoice_slip" optional="hide"/>
+                <field name="invoice_state" optional="hide"/>
+                <field name="company_id" invisible="1"/>
+                <field name="vendor_id" invisible="1"/>
+                <field name="vendor_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sales_summary_search" model="ir.ui.view">
+        <field name="name">sales.data.search.view</field>
+        <field name="model">sales.summary</field>
+        <field name="arch" type="xml">
+            <search string="Search">
+                <filter name="filter_create_date" date="date" string="Sales Date"
+                        default_period="this_month,last_month,this_year,last_year"/>
+                <group>
+                    <field name="barcode" string="Barcode" filter_domain="[('barcode', 'ilike', self)]"/>
+                    <field name="standard_description" string="Product" filter_domain="[('standard_description', 'ilike', self)]"/>
+                    <field name="product_category" string="Product Category" filter_domain="[('product_category', 'ilike', self)]"/>
+                    <field name="branch" string="Branch" filter_domain="[('branch', 'ilike', self)]"/>
+                    <field name="area" string="Area" filter_domain="[('area', 'ilike', self)]"/>
+                    <field name="usage" string="Usage" filter_domain="[('usage', 'ilike', self)]"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sales_summary_graph_view">
+        <field name="name">Sales Summary Graph</field>
+        <field name="model">sales.summary</field>
+        <field name="arch" type="xml">
+            <graph string="Sales Graph" type="pie">
+                <field name="branch"/>
+                <field name="so_number" invisible="1"/>
+                <field name="so_line_id" invisible="1"/>
+
+            </graph>
+        </field>
+    </record>
+
+    <!-- Pivot view -->
+
+    <record model="ir.ui.view" id="sales_summary_pivot_view">
+        <field name="name">Sales Summary Pivot</field>
+        <field name="model">sales.summary</field>
+        <field name="arch" type="xml">
+            <pivot string="Sales Pivot">
+                <field name="qty" type="measure" operator="sum" string="Qty"/>
+                <field name="cost" type="measure" operator="sum" string="Cost"/>
+                <field name="amount" type="measure" operator="sum" string="Amount"/>
+                <field name="branch" type="row"/>
+                <field name="date" type="col"/>
+                <field name="so_number"/>
+                <field name="so_line_id" invisible="1"/>
+            </pivot>
+        </field>
+    </record>
+    <!--    daily-->
+    <record model="ir.ui.view" id="sales_summary_daily_pivot_view">
+        <field name="name">Sales Summary Daily Pivot</field>
+        <field name="model">sales.summary</field>
+        <field name="arch" type="xml">
+            <pivot string="Sales Pivot">
+                <field name="qty" type="measure" operator="sum" string="Qty"/>
+                <field name="cost" type="measure" operator="sum" string="Cost"/>
+                <field name="amount" type="measure" operator="sum" string="Amount"/>
+                <field name="branch" type="row"/>
+                <field name="date" type="col" interval="day"/>
+                <field name="so_number"/>
+                <field name="so_line_id" invisible="1"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!--week-->
+    <record model="ir.ui.view" id="sales_summary_week_pivot_view">
+        <field name="name">Sales Summary Weekly Pivot</field>
+        <field name="model">sales.summary</field>
+        <field name="arch" type="xml">
+            <pivot string="Sales Pivot">
+                <field name="qty" type="measure" operator="sum" string="Qty"/>
+                <field name="cost" type="measure" operator="sum" string="Cost"/>
+                <field name="amount" type="measure" operator="sum" string="Amount"/>
+                <field name="branch" type="row"/>
+                <field name="date" type="col" interval="week"/>
+                <field name="so_number"/>
+                <field name="so_line_id" invisible="1"/>
+            </pivot>
+        </field>
+    </record>
+    <!--month-->
+    <record model="ir.ui.view" id="sales_summary_month_pivot_view">
+        <field name="name">Sales Summary Monthly Pivot</field>
+        <field name="model">sales.summary</field>
+        <field name="arch" type="xml">
+            <pivot string="Sales Pivot">
+                <field name="qty" type="measure" operator="sum" string="Qty"/>
+                <field name="cost" type="measure" operator="sum" string="Cost"/>
+                <field name="amount" type="measure" operator="sum" string="Amount"/>
+                <field name="branch" type="row"/>
+                <field name="date" type="col" interval="month"/>
+                <field name="so_number"/>
+                <field name="so_line_id" invisible="1"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!--year-->
+    <record model="ir.ui.view" id="sales_summary_year_pivot_view">
+        <field name="name">Sales Summary Yearly Pivot</field>
+        <field name="model">sales.summary</field>
+        <field name="arch" type="xml">
+            <pivot string="Sales Pivot">
+                <field name="qty" type="measure" operator="sum" string="Qty"/>
+                <field name="cost" type="measure" operator="sum" string="Cost"/>
+                <field name="amount" type="measure" operator="sum" string="Amount"/>
+                <field name="branch" type="row"/>
+                <field name="date" type="col" interval="year"/>
+                <field name="so_number"/>
+                <field name="so_line_id" invisible="1"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="sales_summary_list_action">
+        <field name="name">Sales Summary</field>
+        <field name="res_model">sales.summary</field>
+        <field name="view_id" ref="sales_summary_tree_view"/>
+        <field name="search_view_id" ref="sales_summary_search"/>
+        <field name="domain">[('company_id', 'in', allowed_company_ids)]</field>
+        <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="sales_summary_daily_action_pivot">
+        <field name="name">Daily sales</field>
+        <field name="res_model">sales.summary</field>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="sales_summary_daily_pivot_view"/>
+        <field name="search_view_id" ref="sales_summary_search"/>
+    </record>
+
+    <record model="ir.actions.act_window" id="sales_summary_weekly_action_pivot">
+        <field name="name">Weekly sales</field>
+        <field name="res_model">sales.summary</field>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="sales_summary_week_pivot_view"/>
+        <field name="search_view_id" ref="sales_summary_search"/>
+    </record>
+
+    <record model="ir.actions.act_window" id="sales_summary_monthly_action_pivot">
+        <field name="name">Monthly sales</field>
+        <field name="res_model">sales.summary</field>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="sales_summary_month_pivot_view"/>
+        <field name="search_view_id" ref="sales_summary_search"/>
+    </record>
+
+    <record model="ir.actions.act_window" id="sales_summary_yearly_action_pivot">
+        <field name="name">Yearly sales</field>
+        <field name="res_model">sales.summary</field>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="sales_summary_year_pivot_view"/>
+        <field name="search_view_id" ref="sales_summary_search"/>
+    </record>
+
+</odoo>

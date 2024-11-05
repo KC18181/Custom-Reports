@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--  Tree View -->
+     <record model="ir.ui.view" id="target_adjustment_view">
+            <field name="name">Target Adjustment View</field>
+            <field name="model">target.adjustment</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="company_id"/>
+                    <field name="branch_name"/>
+                    <field name="area"/>
+                    <field name="barcode"/>
+                    <field name="description"/>
+                    <field name="standard_des"/>
+                    <field name="brand"/>
+                    <field name="category"/>
+                    <field name="month_date"/>
+                    <field name="quantity"/>
+                    <field name="unit_price"/>
+                    <field name="amount"/>
+                </tree>
+            </field>
+        </record>
+    <!-- Form View-->
+        <record model="ir.ui.view" id="target_adjustment_form_views">
+        <field name="name">Target Adjustment</field>
+        <field name="model">target.adjustment</field>
+        <field name="arch" type="xml">
+            <form string="Target Adjustment">
+                <group col="4">
+                     <field name="company_id"/>
+                    <field name="branch_name"/>
+                    <field name="area"/>
+                    <field name="barcode"/>
+                    <field name="description"/>
+                    <field name="standard_des"/>
+                    <field name="brand"/>
+                    <field name="category"/>
+                    <field name="month_date"/>
+                    <field name="quantity"/>
+                    <field name="unit_price"/>
+                    <field name="amount"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="target_adjustment_action">
+            <field name="name">Target Adjustment Action</field>
+            <field name="res_model">target.adjustment</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+</odoo>

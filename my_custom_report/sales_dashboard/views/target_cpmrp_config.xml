@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="target_mc_form_views">
+        <field name="name">Target MC Form</field>
+        <field name="model">target.cpmrp.config</field>
+        <field name="arch" type="xml">
+            <form string="Sales Cash">
+               <group col="2">
+                    <group>
+                        <field name="target_company"/>
+                        <field name="target_branch"/>
+                        <field name="target_area"/>
+                        <field name="target_category"/>
+                        <field name="target_date"/>
+                        <field name="target_quantity"/>
+                        <field name="target_value"/>
+                    </group>
+               </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="target_mc_tree_view">
+        <field name="name">Target Tree View</field>
+        <field name="model">target.cpmrp.config</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="target_company"/>
+                <field name="target_branch"/>
+                <field name="target_area"/>
+                <field name="target_category"/>
+                <field name="target_date"/>
+                <field name="target_quantity"/>
+                <field name="target_value"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="target_mc_action">
+        <field name="name">Accounting Target Data</field>
+        <field name="res_model">target.cpmrp.config</field>
+        <field name="view_id" ref="target_mc_tree_view"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

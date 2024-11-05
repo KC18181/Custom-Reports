@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!--
+    Write the treeview for res_branch model
+    fields:
+        name
+        code
+        company_id
+        active
+    Write the formview for res_branch model
+    fields:
+        <group>
+            <group>
+                <field name="name" />
+                <field name="code" />
+            </group>
+            <group>
+                <field name="company_id" />
+                <field name="active" />
+            </group>
+        </group>
+    Write the action window for res_branch model
+    Write the menu item for res_branch model
+    -->
+
+    <odoo>
+        <data>
+            <!-- Add your module dependencies here if required -->
+
+            <!-- Define the scheduled action -->
+            <record id="cron_sync_branches_action" model="ir.cron">
+                <field name="name">Sync Branches Action</field>
+                <field name="model_id" ref="model_res_branch"/>
+                <field name="priority" eval="2"/>
+                <field name="state">code</field>
+                <field name="code">model.add_branches()</field>
+                <field name="interval_number">1</field>
+                <field name="interval_type">days</field>
+                <field name="numbercall">-1</field>
+                <field name="nextcall" eval="datetime.now() + (datetime.now(pytz.timezone('Asia/Manila')).replace(hour=0, minute=0, second=1) - datetime.now(pytz.timezone('Asia/Manila'))) % timedelta(hours=24)"/>
+                <field name="active">True</field>
+                <field name="doall" eval="True" />
+                <!-- Add other required fields of ir.cron as needed -->
+            </record>
+        </data>
+    </odoo>
+
+
+
+    <!-- res.branch tree view -->
+    <record id="res_branch_view_tree" model="ir.ui.view">
+        <field name="name">res.branch.view.tree</field>
+        <field name="model">res.branch</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="name" />
+                <field name="code" />
+                <field name="company_id" />
+                <field name="active" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- res.branch form view -->
+    <record id="res_branch_view_form" model="ir.ui.view">
+        <field name="name">res.branch.view.form</field>
+        <field name="model">res.branch</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <!-- Add your fields here -->
+                        <group>
+                            <field name="name"/>
+                            <field name="code" />
+                        </group>
+                        <group>
+                            <field name="company_id" required="1"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_res_branch" model="ir.actions.act_window">
+        <field name="name">Branch</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.branch</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help">No branch here yet, Please create a branch first.</field>
+    </record>
+
+
+    <menuitem action="action_res_branch" id="menu_action_res_branch" parent="base.menu_users" sequence="100" groups="res_branch.res_branch_admin"/>
+
+    <!-- res.users form view -->
+
+    <record id="res_users_branch_inherited_view_form" model="ir.ui.view">
+        <field name="name">res.users.view.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//form//sheet/notebook/page[1]/group[1]" position="after">
+                <group string="Multi Branches" groups="res_branch.res_branch_admin">
+                    <field name="branch_ids" widget="many2many_tags" />
+                    <field name="branch_id"/>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+
+</odoo>

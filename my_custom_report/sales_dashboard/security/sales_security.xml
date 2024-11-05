@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sd_read_only" model="res.groups">
+        <field name="name">Sales Dashboard SCM</field>
+    </record>
+
+    <record id="sd_area" model="res.groups">
+        <field name="name">Sales Dashboard Area</field>
+    </record>
+
+    <record id="sd_branch" model="res.groups">
+        <field name="name">Sales Dashboard Branch</field>
+    </record>
+
+</odoo>
+

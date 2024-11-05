@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="res_area_code_admin" model="res.groups">
+        <field name="name">Area Code Administrators</field>
+    </record>
+
+</odoo>

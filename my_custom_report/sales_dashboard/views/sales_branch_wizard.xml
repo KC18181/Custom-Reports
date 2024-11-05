@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sales_branch_wizard_form" model="ir.ui.view">
+            <field name="name">sales.branch.wizard.form</field>
+            <field name="model">sales.branch.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Sales Branch Wizard Form">
+                    <group col="2">
+                        <group>
+                            <field name="date_from" required="True"/>
+                        </group>
+                        <group>
+                            <field name="date_to" required="True"/>
+                        </group>
+                        <group>
+                            <field name="branch_filter"/>
+                        </group>
+                        <group>
+                            <field name="report_filter" required="True"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="sales_branch_list_view" string="View" type="object" class="btn-primary"/>
+                        <button name="get_sales_branch_excel_report" type="object" default_focus="1"
+                                string="Export Excel" class="oe_highlight" icon="fa-download"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_sales_branch_wizard" model="ir.actions.act_window">
+            <field name="name">Sales Branch Wizard</field>
+            <field name="res_model">sales.branch.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_area_code_admin,Admin ResAreaCode,model_res_area_code,res_area_code_admin,1,1,1,0
+access_res_area_config_admin,Admin ResAreaConfig,model_res_area_config,res_area_code_admin,1,1,1,0

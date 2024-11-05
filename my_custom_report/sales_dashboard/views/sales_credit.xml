@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="sale_credit_form_views">
+        <field name="name">Sales Credit</field>
+        <field name="model">sales.credit</field>
+        <field name="arch" type="xml">
+            <form string="Sales Credit">
+               <group col="2">
+                    <group>
+                        <field name="so_line_id" invisible="1"/>
+                        <field name="salesteam"/>
+                        <field name="date"/>
+                        <field name="salesperson"/>
+                        <field name="agent_name"/>
+                        <field name="so_number"/>
+                        <field name="customer"/>
+                        <field name="product_category"/>
+                        <field name="brand"/>
+                        <field name="barcode"/>
+                        <field name="standard_description"/>
+                        <field name="usage"/>
+                    </group>
+                    <group>
+                        <field name="engine_number"/>
+                        <field name="chassis_number"/>
+                        <field name="pricelist"/>
+                        <field name="tags"/>
+                        <field name="payment_term"/>
+                        <field name="qty"/>
+                        <field name="cost"/>
+                        <field name="amount"/>
+                        <field name="company"/>
+                        <field name="branch_id" invisible="1"/>
+                        <field name="invoice_date"/>
+                        <field name="invoice_name"/>
+                        <field name="invoice_slip"/>
+                        <field name="invoice_state"/>
+                        <field name="vendor_id" invisible="1"/>
+                        <field name="vendor_name"/>
+                        <field name="company_id" invisible="1"/>
+                    </group>
+               </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sales_credit_tree_view">
+        <field name="name">Sales Credit Tree View</field>
+        <field name="model">sales.credit</field>
+        <field name="arch" type="xml">
+            <tree>
+               <field name="so_line_id" invisible="not context.get('so_number', False)"/>
+               <field name="salesteam"/>
+               <field name="date"/>
+               <field name="salesperson"/>
+               <field name="agent_name"/>
+               <field name="so_number"/>
+               <field name="customer"/>
+               <field name="product_category"/>
+               <field name="brand"/>
+               <field name="barcode"/>
+               <field name="standard_description"/>
+               <field name="usage" optional="hide"/>
+               <field name="engine_number"/>
+               <field name="chassis_number"/>
+               <field name="pricelist"/>
+               <field name="tags"/>
+               <field name="payment_term"/>
+               <field name="qty"/>
+               <field name="cost"/>
+               <field name="amount"/>
+               <field name="company"/>
+               <field name="branch_id" invisible="1"/>
+               <field name="invoice_date" optional="hide"/>
+               <field name="invoice_name" optional="hide"/>
+               <field name="invoice_slip" optional="hide"/>
+               <field name="invoice_state" optional="hide"/>
+               <field name="vendor_id" invisible="1"/>
+               <field name="vendor_name" optional="hide"/>
+               <field name="company_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sales_credit_search" model="ir.ui.view">
+        <field name="name">sales.credit.search.view</field>
+        <field name="model">sales.credit</field>
+        <field name="arch" type="xml">
+            <search string="Search">
+                <filter name="filter_create_date" date="date" string="Order Date"
+                        default_period="this_month,last_month,this_year,last_year"/>
+                <group>
+                    <field name="barcode" string="Barcode" filter_domain="[('barcode', 'ilike', self)]"/>
+                    <field name="product_category" string="Product Category" filter_domain="[('product_category', 'ilike', self)]"/>
+                    <field name="salesteam" string="Sales Team" filter_domain="[('salesteam', 'ilike', self)]"/>
+                    <field name="standard_description" string="Standard Description" filter_domain="[('standard_description', 'ilike', self)]"/>
+                    <field name="usage" string="Usage" filter_domain="[('usage', 'ilike', self)]"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sales_credit_graph_view">
+        <field name="name">Sales Credit Graph</field>
+        <field name="model">sales.credit</field>
+        <field name="arch" type="xml">
+            <graph string="Sales Credit Graph" type="pie">
+                <field name="salesteam"/>
+                <field name="so_number" invisible="1"/>
+                <field name="so_line_id" invisible="1"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Pivot view -->
+
+    <record model="ir.ui.view" id="sales_credit_pivot_view">
+        <field name="name">Sales Credit Pivot</field>
+        <field name="model">sales.credit</field>
+        <field name="arch" type="xml">
+            <pivot string="Sales Credit Pivot">
+                <field name="qty" type="measure" operator="sum" string="Qty"/>
+                <field name="cost" type="measure" operator="sum" string="Cost"/>
+                <field name="amount" type="measure" operator="sum" string="Amount"/>
+                <field name="salesteam" type="row"/>
+                <field name="date" type="col"/>
+                <field name="so_number" invisible="1"/>
+                <field name="so_line_id" invisible="1"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="sales_credit_action">
+        <field name="name">Sales Credit</field>
+        <field name="res_model">sales.credit</field>
+        <field name="view_id" ref="sales_credit_tree_view"/>
+        <field name="search_view_id" ref="sales_credit_search"/>
+        <field name="domain">[('company_id', 'in', allowed_company_ids)]</field>
+        <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+
+</odoo>

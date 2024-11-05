@@ -1,0 +1,90 @@
+<odoo>
+    <data>
+        <menuitem name="Sales Dashboard" id="sales_dashboard_menu"
+                  sequence="1"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Data" id="sd_data_menu"
+                  parent="sales_dashboard_menu" sequence="1"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Report" id="sales_performance_menu"
+                  parent="sales_dashboard_menu" sequence="3"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Target" id="mc_barcode_menu"
+                  parent="sd_data_menu"
+                  action="sales_dashboard.mc_barcode_views_action" sequence="2"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Sales Cash" id="sales_cash_menu"
+                  parent="sd_data_menu"
+                  action="sales_dashboard.sales_cash_action" sequence="3"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Sales Credit" id="sales_credit_menu"
+                  parent="sd_data_menu"
+                  action="sales_dashboard.sales_credit_action" sequence="4"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Sales Summary" id="sales_summary_menu"
+                  parent="sd_data_menu"
+                  action="sales_dashboard.sales_summary_list_action" sequence="1"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Actual vs Target" id="sales_list_id"
+                  parent="sales_dashboard_menu"
+                  action="sales_dashboard.action_sales_wizard" sequence="2"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Daily Report" id="sales_summary_daily_menu_pivot"
+                  parent="sales_performance_menu"
+                  action="sales_dashboard.sales_summary_daily_action_pivot" sequence="1"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Weekly Report" id="sales_summary_weekly_menu_pivot"
+                  parent="sales_performance_menu"
+                  action="sales_dashboard.sales_summary_weekly_action_pivot" sequence="2"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Monthly Report" id="sales_summary_monthly_menu_pivotm"
+                  parent="sales_performance_menu"
+                  action="sales_dashboard.sales_summary_monthly_action_pivot" sequence="3"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Yearly Report" id="sales_summary_yearly_menu_pivotm"
+                  parent="sales_performance_menu"
+                  action="sales_dashboard.sales_summary_yearly_action_pivot" sequence="4"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Sales Branch Report" id="sales_branch_menu"
+                  parent="sales_performance_menu"
+                  action="sales_dashboard.action_sales_branch_wizard" sequence="5"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Weekly Sales GM's Report" id="sales_gm_menu"
+                  parent="sales_performance_menu"
+                  action="sales_dashboard.action_sales_gm_wizard" sequence="6"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Configuration" id="sd_config"
+                  parent="sales_dashboard_menu" sequence="6"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Holiday " id="holiday_menu"
+                  parent="sd_config" sequence="2"
+                  action="sales_dashboard.target_adjustment_action"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Accounting Target Data " id="operation_target_menu"
+                  parent="sd_config" sequence="2"
+                  action="sales_dashboard.target_mc_action"
+                  groups="sales_dashboard.sd_area,sales_dashboard.sd_branch,sales_dashboard.sd_read_only,base.group_system"/>
+
+        <menuitem name="Settings" id="menu_sd_settings"
+                parent="sd_config" sequence="3"
+                action="sales_dashboard.sidecar_config_action"
+                groups="base.group_system"/>
+
+    </data>
+</odoo>

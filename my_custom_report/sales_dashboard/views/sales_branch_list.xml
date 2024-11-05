@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+        <record model="ir.ui.view" id="sales_branch_form_views">
+            <field name="name">Sales Branch List Form</field>
+            <field name="model">sales.branch.list</field>
+            <field name="arch" type="xml">
+                <form string="Sales Cash">
+                   <group col="2">
+                        <group>
+                            <field name="so_line_id" invisible="1"/>
+                            <field name="salesteam"/>
+                            <field name="date"/>
+                            <field name="salesperson"/>
+                            <field name="so_number"/>
+                            <field name="customer"/>
+                            <field name="product_category"/>
+                            <field name="brand"/>
+                            <field name="barcode"/>
+                            <field name="standard_description"/>
+                            <field name="usage"/>
+                        </group>
+                        <group>
+                            <field name="engine_number"/>
+                            <field name="chassis_number"/>
+                            <field name="pricelist"/>
+                            <field name="tags"/>
+                            <field name="payment_term"/>
+                            <field name="qty"/>
+                            <field name="cost"/>
+                            <field name="amount"/>
+                            <field name="company"/>
+                    </group>
+               </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sales_branch_tree_view">
+        <field name="name">Sales Branch Tree View</field>
+        <field name="model">sales.branch.list</field>
+        <field name="arch" type="xml">
+            <tree>
+               <field name="so_line_id" invisible="1"/>
+               <field name="salesteam"/>
+               <field name="date"/>
+               <field name="salesperson"/>
+               <field name="so_number"/>
+               <field name="customer"/>
+               <field name="product_category"/>
+               <field name="brand"/>
+               <field name="barcode"/>
+               <field name="standard_description"/>
+               <field name="usage" optional="hide"/>
+               <field name="engine_number"/>
+               <field name="chassis_number"/>
+               <field name="pricelist"/>
+               <field name="tags"/>
+               <field name="payment_term"/>
+               <field name="qty"/>
+               <field name="cost"/>
+               <field name="amount"/>
+               <field name="company"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- for sumamry form and tree view-->
+    <record model="ir.ui.view" id="sales_summary_form_views">
+            <field name="name">Sales Branch List Form</field>
+            <field name="model">sales.branch.list</field>
+            <field name="arch" type="xml">
+                <form string="Sales Cash">
+                   <group col="2">
+                        <group>
+                            <field name="date"/>
+                            <field name="so_number"/>
+                            <field name="area"/>
+                            <field name="branch"/>
+                            <field name="barcode"/>
+                            <field name="brand"/>
+                            <field name="product_category"/>
+                            <field name="standard_description"/>
+                            <field name="usage"/>
+                            <field name="color"/>
+                            <field name="customer"/>
+                         </group>
+                        <group>
+                            <field name="engine_number"/>
+                            <field name="chassis_number"/>
+                            <field name="payment_term"/>
+                            <field name="pricelist"/>
+                            <field name="qty"/>
+                            <field name="cost"/>
+                            <field name="amount"/>
+                            <field name="company"/>
+                            <field name="res_branch_name"/>
+                            <field name="sales_type" invisible="1"/>
+                            <field name="invoice_date"/>
+                            <field name="invoice_name"/>
+                            <field name="invoice_slip"/>
+                         </group>
+                   </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="sales_summary_tree_view">
+        <field name="name">Sales Branch Tree View</field>
+        <field name="model">sales.branch.list</field>
+        <field name="arch" type="xml">
+            <tree>
+                   <field name="so_number"/>
+                   <field name="area"/>
+                   <field name="branch"/>
+                   <field name="barcode"/>
+                   <field name="brand"/>
+                   <field name="product_category"/>
+                   <field name="standard_description"/>
+                    <field name="usage" optional="hide"/>
+                   <field name="color"/>
+                   <field name="customer"/>
+                   <field name="engine_number"/>
+                   <field name="chassis_number"/>
+                   <field name="payment_term"/>
+                   <field name="pricelist"/>
+                   <field name="qty"/>
+                   <field name="cost"/>
+                   <field name="amount"/>
+                   <field name="company"/>
+                   <field name="res_branch_name"/>
+                   <field name="sales_type" invisible="1"/>
+                   <field name="invoice_date"/>
+                   <field name="invoice_name"/>
+                   <field name="invoice_slip"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="sales_branch_list_action">
+        <field name="name">Sales Branch List</field>
+        <field name="res_model">sales.branch.list</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

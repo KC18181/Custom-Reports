@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="0">
+        <record id="ir_rule_sd_data_area" model="ir.rule">
+            <field name="name">SD Area</field>
+            <field name="model_id" ref="sales_dashboard.model_sales_summary"/>
+            <field name="groups" eval="[(6,0, [ref('sales_dashboard.sd_area')])]"/>
+            <field name="domain_force">[('branch_id', 'in', user.branch_ids.mapped('code'))]</field>
+            <field name="active" eval="1"/>
+        </record>
+        <record id="ir_rule_sd_data_branch" model="ir.rule">
+            <field name="name">SD Branch</field>
+            <field name="model_id" ref="sales_dashboard.model_sales_summary"/>
+            <field name="groups" eval="[(6,0, [ref('sales_dashboard.sd_branch')])]"/>
+            <field name="domain_force">[('branch_id', '=', [user.branch_id.code])]</field>
+            <field name="active" eval="1"/>
+        </record>
+        <record id="ir_rule_sd_data_area_branch_field" model="ir.rule">
+            <field name="name">SD Area and Admin - Branch Field</field>
+            <field name="model_id" ref="sales_dashboard.model_sales_branch"/>
+            <field name="groups" eval="[(6,0, [ref('sales_dashboard.sd_area')]), (6,0, [ref('sales_dashboard.sd_read_only')]), (6,0, [ref('base.group_system')])]"/>
+            <field name="domain_force">[('branch_id', 'in', user.branch_ids.mapped('code'))]</field>
+            <field name="active" eval="1"/>
+        </record>
+        <record id="ir_rule_sd_data_branch_branch_field" model="ir.rule">
+            <field name="name">SD Branch - Branch Field</field>
+            <field name="model_id" ref="sales_dashboard.model_sales_branch"/>
+            <field name="groups" eval="[(6,0, [ref('sales_dashboard.sd_branch')])]"/>
+            <field name="domain_force">[('branch_id', 'in', user.branch_ids.mapped('code'))]</field>
+            <field name="active" eval="1"/>
+        </record>
+        <record id="ir_rule_sd_data_area_company" model="ir.rule">
+            <field name="name">SD Area - Company</field>
+            <field name="model_id" ref="sales_dashboard.model_sales_company"/>
+            <field name="groups" eval="[(6,0, [ref('sales_dashboard.sd_area')])]"/>
+            <field name="domain_force">[('company_name', 'in', user.company_ids.mapped('name'))]</field>
+            <field name="active" eval="1"/>
+        </record>
+        <record id="ir_rule_sd_data_branch_company" model="ir.rule">
+            <field name="name">SD Branch - Company</field>
+            <field name="model_id" ref="sales_dashboard.model_sales_company"/>
+            <field name="groups" eval="[(6,0, [ref('sales_dashboard.sd_branch')])]"/>
+            <field name="domain_force">[('company_name', '=', [user.company_id.name])]</field>
+            <field name="active" eval="1"/>
+        </record>
+        <record id="ir_rule_sales_cash_area" model="ir.rule">
+            <field name="name">SD Area Cash</field>
+            <field name="model_id" ref="sales_dashboard.model_sales_cash"/>
+            <field name="groups" eval="[(6,0, [ref('sales_dashboard.sd_area')])]"/>
+            <field name="domain_force">[('branch_id', 'in', user.branch_ids.mapped('code'))]</field>
+            <field name="active" eval="1"/>
+        </record>
+        <record id="ir_rule_sales_cash_branch" model="ir.rule">
+            <field name="name">SD Branch Cash</field>
+            <field name="model_id" ref="sales_dashboard.model_sales_cash"/>
+            <field name="groups" eval="[(6,0, [ref('sales_dashboard.sd_branch')])]"/>
+            <field name="domain_force">[('branch_id', '=', [user.branch_id.code])]</field>
+            <field name="active" eval="1"/>
+        </record>
+        <record id="ir_rule_sales_credit_area" model="ir.rule">
+            <field name="name">SD Area Credit</field>
+            <field name="model_id" ref="sales_dashboard.model_sales_credit"/>
+            <field name="groups" eval="[(6,0, [ref('sales_dashboard.sd_area')])]"/>
+            <field name="domain_force">[('branch_id', 'in', user.branch_ids.mapped('code'))]</field>
+            <field name="active" eval="1"/>
+        </record>
+        <record id="ir_rule_sales_credit_branch" model="ir.rule">
+            <field name="name">SD Branch Credit</field>
+            <field name="model_id" ref="sales_dashboard.model_sales_credit"/>
+            <field name="groups" eval="[(6,0, [ref('sales_dashboard.sd_branch')])]"/>
+            <field name="domain_force">[('branch_id', '=', [user.branch_id.code])]</field>
+            <field name="active" eval="1"/>
+        </record>
+    </data>
+</odoo>
+
+
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tree View -->
+     <record model="ir.ui.view" id="target_adjust_view">
+            <field name="name">Holiday Non Operation Tree View</field>
+            <field name="model">holiday.non.operation</field>
+            <field name="arch" type="xml">
+                <tree>
+                <field name="calendar_year"/>
+                <field name="country"/>
+            </tree>
+            </field>
+        </record>
+
+    <!-- Form View -->
+    <record model="ir.ui.view" id="target_adjustment_form_views">
+        <field name="name">Holiday Non Operation Form View</field>
+        <field name="model">holiday.non.operation</field>
+        <field name="arch" type="xml">
+            <form string="Holiday Form">
+                <group>
+                    <group>
+                        <field name="calendar_year"/>
+                        <field name="country"/>
+                    </group>
+                    <notebook>
+                        <page string="Public Holidays">
+                            <field name="holiday_lines_ids">
+                                <tree string="Public Holidays" editable="bottom">
+                                    <field name="holiday_date" />
+                                    <field name="holiday_name" />
+                                    <field name="holiday_type"/>
+                                    <field name="related_state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Window Action -->
+    <record model="ir.actions.act_window" id="target_adjustment_action">
+            <field name="name">Holiday Non Operation Action</field>
+            <field name="res_model">holiday.non.operation</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Graph view -->
+    <record model="ir.ui.view" id="sales_analysis_graph_view">
+        <field name="name">MC Barcode Graph View</field>
+        <field name="model">mc.barcode</field>
+        <field name="arch" type="xml">
+            <graph string="Sales Graph">
+                <field name="company_id"/>
+                <field name="description"/>
+                <field name="branch_name"/>
+                <field name="quantity"/>
+            </graph>
+        </field>
+    </record>
+
+            <!-- Pivot view -->
+    <record model="ir.ui.view" id="sales_analysis_pivot_view">
+        <field name="name">MC Barcode Pivot View</field>    
+        <field name="model">mc.barcode</field>
+        <field name="arch" type="xml">  
+            <pivot string="Sales Pivot">
+                <field name="company_id"/>
+                <field name="description"/>
+                <field name="branch_name"/>
+                <field name="quantity"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="sales_analysis_action">
+        <field name="name">MC Sales Analysis</field>
+        <field name="res_model">mc.barcode</field>
+        <field name="view_mode">graph,pivot</field>
+     
+    </record>   
+</odoo>

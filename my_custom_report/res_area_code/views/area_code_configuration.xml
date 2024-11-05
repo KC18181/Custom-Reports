@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!--
+    Write the treeview for res_branch model
+    fields:
+        name
+        code
+        company_id
+        active
+    Write the formview for res_branch model
+    fields:
+        <group>
+            <group>
+                <field name="name" />
+                <field name="code" />
+            </group>
+            <group>
+                <field name="company_id" />
+                <field name="active" />
+            </group>
+        </group>
+    Write the action window for res_branch model
+    Write the menu item for res_branch model
+    -->
+
+    <odoo>
+        <data>
+            <!-- Add your module dependencies here if required -->
+
+            <!-- Define the scheduled action -->
+            <record id="cron_sync_area_code_action" model="ir.cron">
+                <field name="name">Sync Area Code Action</field>
+                <field name="model_id" ref="model_res_area_code"/>
+                <field name="priority" eval="2"/>
+                <field name="state">code</field>
+                <field name="code">model.load_area()</field>
+                <field name="interval_number">1</field>
+                <field name="interval_type">days</field>
+                <field name="numbercall">-1</field>
+                <field name="nextcall" eval="datetime.now() + (datetime.now(pytz.timezone('Asia/Manila')).replace(hour=0, minute=0, second=1) - datetime.now(pytz.timezone('Asia/Manila'))) % timedelta(hours=24)"/>
+                <field name="active">True</field>
+                <field name="doall" eval="True" />
+                <!-- Add other required fields of ir.cron as needed -->
+            </record>
+        </data>
+    </odoo>
+
+
+
+    <!-- res.branch tree view -->
+    <record id="res_area_code_view_tree" model="ir.ui.view">
+        <field name="name">res.area_code.view.tree</field>
+        <field name="model">res.area.code</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="branch_name" />
+                <field name="area_code" />
+                <field name="branch_id" />
+                <field name="active" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- res.branch form view -->
+    <record id="res_area_code_view_form" model="ir.ui.view">
+        <field name="name">res.area.code.view.form</field>
+        <field name="model">res.area.code</field>
+        <field name="arch" type="xml">
+            <form string="Area Code Form">
+                <sheet>
+                    <group>
+                        <!-- Add your fields here -->
+                        <group>
+                            <field name="branch_name"/>
+                            <field name="area_code" />
+                        </group>
+                        <group>
+                            <field name="branch_id" required="1"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_res_area_code" model="ir.actions.act_window">
+        <field name="name">Area Code</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.area.code</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help">No area here yet, Please create a branch first.</field>
+    </record>
+
+    <record model="ir.ui.view" id="area_config_form_view_">
+            <field name="name">Area config form</field>
+            <field name="model">res.area.config</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Area Config" col="4">
+                            <field name="host"/>
+                            <field name="database"/>
+                            <field name="port"/>
+                            <field name="user"/>
+                            <field name="password" password="True"/>
+                            <field name="active"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="area_config_tree_view_">
+            <field name="name">Area config list</field>
+            <field name="model">res.area.config</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="host"/>
+                    <field name="database"/>
+                    <field name="port"/>
+                    <field name="user"/>
+                    <field name="password" password="True"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="area_config_action">
+            <field name="name">Area config</field>
+            <field name="res_model">res.area.config</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+    <menuitem action="action_res_area_code"
+              id="menu_action_res_area_code"
+              parent="base.menu_users"
+              sequence="100"
+              groups="res_area_code.res_area_code_admin"/>
+
+    <menuitem action="area_config_action"
+              id="menu_action_res_area_config"
+              parent="base.menu_users"
+              sequence="101"
+              groups="res_area_code.res_area_code_admin"/>
+
+
+</odoo>

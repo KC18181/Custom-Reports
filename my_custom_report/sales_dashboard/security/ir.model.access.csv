@@ -1,0 +1,102 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+sd_admin_acess_sales_cash,Sales Cash,model_sales_cash,base.group_system,1,1,1,1
+sd_admin_acess_sales_credit,Sales Credit,model_sales_credit,base.group_system,1,1,1,1
+sd_admin_acess_sales_wizard,Sales Wizard,model_sales_wizard,base.group_system,1,1,1,1
+sd_admin_acess_sales_list,Sales List,model_sales_list,base.group_system,1,1,1,1
+sd_admin_acess_mc_barcode,MC Barcode,model_mc_barcode,base.group_system,1,1,1,1
+sd_admin_acess_sales_brand,Sales Brand,model_sales_brand,base.group_system,1,1,1,1
+sd_admin_acess_sales_description,Sales Description,model_sales_description,base.group_system,1,1,1,1
+sd_admin_acess_sales_category,Sales Category,model_sales_category,base.group_system,1,1,1,1
+sd_admin_acess_sales_branch,Sales Branch,model_sales_branch,base.group_system,1,1,1,1
+sd_admin_acess_sales_area,Sales Area,model_sales_area,base.group_system,1,1,1,1
+sd_admin_acess_sales_usage,Sales Usage,model_sales_usage,base.group_system,1,1,1,1
+sd_admin_acess_sales_company,Sales Company,model_sales_company,base.group_system,1,1,1,1
+sd_admin_acess_sales_type,Sales Type,model_sales_type,base.group_system,1,1,1,1
+sd_admin_acess_sales_outlet,Sales Outlet,model_sales_outlet,base.group_system,1,1,1,1
+sd_admin_acess_sales_customer,Sales Customer,model_sales_customer,base.group_system,1,1,1,1
+sd_admin_acess_sales_service,Sales Service,model_sales_service,base.group_system,1,1,1,1
+sd_admin_acess_holiday_non_operation,Holiday Non Operation,model_holiday_non_operation,base.group_system,1,1,1,1
+sd_admin_acess_holiday_non_operation_line,Holiday Non Operation Line,model_holiday_non_operation_line,base.group_system,1,1,1,1
+sd_admin_acess_sales_branch_wizard,Sales Branch Wizard,model_sales_branch_wizard,base.group_system,1,1,1,1
+sd_admin_acess_sales_branch_list,Sales Branch List,model_sales_branch_list,base.group_system,1,1,1,1
+sd_admin_access_sales_summary,Sales Summary,model_sales_summary,base.group_system,1,1,1,1
+sd_admin_access_sidecar_config,Sidecar Config,model_sidecar_config,base.group_system,1,1,1,1
+sd_admin_access_target_cpmrp_config,Target MC,model_target_cpmrp_config,base.group_system,1,1,1,1
+sd_admin_access_sales_gm_wizard,Sales GM Wizard,model_sales_gm_wizard,base.group_system,1,1,1,1
+
+
+sd_read_acess_sales_cash,Read Sales Cash,model_sales_cash,sd_read_only,1,0,0,0
+sd_read_acess_sales_credit,Read Sales Credit,model_sales_credit,sd_read_only,1,0,0,0
+sd_read_acess_sales_wizard,Read Sales Wizard,model_sales_wizard,sd_read_only,1,1,1,1
+sd_read_acess_sales_list,Read Sales List,model_sales_list,sd_read_only,1,0,1,1
+sd_read_acess_mc_barcode,Read MC Barcode,model_mc_barcode,sd_read_only,1,0,0,0
+sd_read_acess_sales_brand,Read Sales Brand,model_sales_brand,sd_read_only,1,0,0,0
+sd_read_acess_sales_description,Read Sales Description,model_sales_description,sd_read_only,1,0,0,0
+sd_read_acess_sales_category,Read Sales Category,model_sales_category,sd_read_only,1,0,0,0
+sd_read_acess_sales_branch,Read Sales Branch,model_sales_branch,sd_read_only,1,0,0,0
+sd_read_acess_sales_area,Read Sales Area,model_sales_area,sd_read_only,1,0,0,0
+sd_read_acess_sales_usage,Read Sales Usage,model_sales_usage,sd_read_only,1,0,0,0
+sd_read_acess_sales_company,Read Sales Company,model_sales_company,sd_read_only,1,0,0,0
+sd_read_acess_sales_type,Read Sales Type,model_sales_type,sd_read_only,1,0,0,0
+sd_read_acess_sales_outlet,Read Sales Outlet,model_sales_outlet,sd_read_only,1,0,0,0
+sd_read_acess_sales_customer,Read Sales Customer,model_sales_customer,sd_read_only,1,0,0,0
+sd_read_acess_sales_service,Read Sales Service,model_sales_service,sd_read_only,1,0,0,0
+sd_read_acess_holiday_non_operation_read,Read Holiday Non Operation,model_holiday_non_operation,sd_read_only,1,0,0,0
+sd_read_acess_holiday_non_operation_line_read,Read Holiday Non Operation Line,model_holiday_non_operation_line,sd_read_only,1,0,0,0
+sd_read_acess_sales_branch_wizard,Read Sales Branch Wizard,model_sales_branch_wizard,sd_read_only,1,1,1,1
+sd_read_acess_sales_branch_list,Read Sales Branch List,model_sales_branch_list,sd_read_only,1,0,1,1
+sd_read_access_sales_summary,Read Sales Summary,model_sales_summary,sd_read_only,1,0,0,0
+sd_read_access_sidecar_config,Read Sidecar Config,model_sidecar_config,sd_read_only,1,1,1,1
+sd_read_access_target_cpmrp_config,Read Target MC,model_target_cpmrp_config,sd_read_only,1,1,1,1
+sd_read_access_sales_gm_wizard,Read Sales GM Wizard,model_sales_gm_wizard,sd_read_only,1,1,1,1
+
+sd_area_acess_sales_cash,Area Sales Cash,model_sales_cash,sd_area,1,0,0,0
+sd_area_acess_sales_credit,Area Sales Credit,model_sales_credit,sd_area,1,0,0,0
+sd_area_acess_sales_wizard,Area Sales Wizard,model_sales_wizard,sd_area,1,1,1,0
+sd_area_acess_sales_list,Area Sales List,model_sales_list,sd_area,1,0,1,1
+sd_area_acess_mc_barcode,Area MC Barcode,model_mc_barcode,sd_area,1,0,0,0
+sd_area_acess_sales_brand,Area Sales Brand,model_sales_brand,sd_area,1,0,0,0
+sd_area_acess_sales_description,Area Sales Description,model_sales_description,sd_area,1,0,0,0
+sd_area_acess_sales_category,Area Sales Category,model_sales_category,sd_area,1,0,0,0
+sd_area_acess_sales_branch,Area Sales Branch,model_sales_branch,sd_area,1,0,0,0
+sd_area_acess_sales_area,Area Sales Area,model_sales_area,sd_area,1,0,0,0
+sd_area_acess_sales_usage,Area Sales Usage,model_sales_usage,sd_area,1,0,0,0
+sd_area_acess_sales_company,Area Sales Company,model_sales_company,sd_area,1,0,0,0
+sd_area_acess_sales_type,Area Sales Type,model_sales_type,sd_area,1,0,0,0
+sd_area_acess_sales_outlet,Area Sales Outlet,model_sales_outlet,sd_area,1,0,0,0
+sd_area_acess_sales_customer,Area Sales Customer,model_sales_customer,sd_area,1,0,0,0
+sd_area_acess_sales_service, Area Sales Service,model_sales_service,sd_area,1,0,0,0
+sd_area_acess_holiday_non_operation_area,Holiday Non Operation,model_holiday_non_operation,sd_area,1,0,0,0
+sd_area_acess_holiday_non_operation_line_area,Holiday Non Operation Line,model_holiday_non_operation_line,sd_area,1,0,0,0
+sd_area_acess_sales_branch_wizard,Area Sales Branch Wizard,model_sales_branch_wizard,sd_area,1,1,1,1
+sd_area_acess_sales_branch_list,Area Sales Branch List,model_sales_branch_list,sd_area,1,0,1,1
+sd_area_access_sales_summary,Area Sales Summary,model_sales_summary,sd_area,1,0,0,0
+sd_area_access_sidecar_config,Area Sidecar Config,model_sidecar_config,sd_area,1,0,0,0
+sd_area_access_target_cpmrp_config,Area Target MC,model_target_cpmrp_config,sd_area,1,0,0,0
+sd_area_acess_sales_gm_wizard,Area Sales GM Wizard,model_sales_gm_wizard,sd_area,1,1,1,1
+
+sd_branch_acess_sales_cash,Branch Sales Cash,model_sales_cash,sd_branch,1,0,0,0
+sd_branch_acess_sales_credit,Branch Sales Credit,model_sales_credit,sd_branch,1,0,0,0
+sd_branch_acess_sales_wizard,Branch Sales Wizard,model_sales_wizard,sd_branch,1,1,1,0
+sd_branch_acess_sales_list,Branch Sales List,model_sales_list,sd_branch,1,0,1,1
+sd_branch_acess_mc_barcode,Branch MC Barcode,model_mc_barcode,sd_branch,1,0,0,0
+sd_branch_acess_sales_brand,Branch Sales Brand,model_sales_brand,sd_branch,1,0,0,0
+sd_branch_acess_sales_description,Branch Sales Description,model_sales_description,sd_branch,1,0,0,0
+sd_branch_acess_sales_category,Branch Sales Category,model_sales_category,sd_branch,1,0,0,0
+sd_branch_acess_sales_branch,Branch Sales Branch,model_sales_branch,sd_branch,1,0,0,0
+sd_branch_acess_sales_area,Branch Sales Area,model_sales_area,sd_branch,1,0,0,0
+sd_branch_acess_sales_usage,Branch Sales Usage,model_sales_usage,sd_branch,1,0,0,0
+sd_branch_acess_sales_company,Branch Sales Company,model_sales_company,sd_branch,1,0,0,0
+sd_branch_acess_sales_type,Branch Sales Type,model_sales_type,sd_branch,1,0,0,0
+sd_branch_acess_sales_outlet,Branch Sales Outlet,model_sales_outlet,sd_branch,1,0,0,0
+sd_branch_acess_sales_customer,Branch Sales Customer,model_sales_customer,sd_branch,1,0,0,0
+sd_branch_acess_sales_service,Branch Sales Service,model_sales_service,sd_branch,1,0,0,0
+sd_branch_acess_holiday_non_operation_branch,Holiday Non Operation,model_holiday_non_operation,sd_branch,1,0,0,0
+sd_branch_acess_holiday_non_operation_line_branch,Holiday Non Operation Line,model_holiday_non_operation_line,sd_branch,1,0,0,0
+sd_branch_acess_sales_branch_wizard,Branch Sales Branch Wizard,model_sales_branch_wizard,sd_branch,1,1,1,1
+sd_branch_acess_sales_branch_list,Branch Sales Branch List,model_sales_branch_list,sd_branch,1,0,1,1
+sd_branch_access_sales_summary,Branch Sales Summary,model_sales_summary,sd_branch,1,0,0,0
+sd_branch_access_sidecar_config,Branch Sidecar Config,model_sidecar_config,sd_branch,1,0,0,0
+sd_branch_access_target_cpmrp_config,Branch Target MC,model_target_cpmrp_config,sd_branch,1,0,0,0
+sd_branch_acess_sales_gm_wizard,Branch Sales GM Wizard,model_sales_gm_wizard,sd_branch,1,1,1,1

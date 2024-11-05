@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_my_wizard_form" model="ir.ui.view">
+            <field name="name">sales.wizard.form</field>
+            <field name="model">sales.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Actual vs Target Wizard Form">
+                    <group col="2">
+                        <group string="Groups and Values">
+                            <field name="criteria" widget="radio" required="True"/>
+                            <field name="unit_of_measure" widget="radio" required="True"/>
+                            <field name="end_date" required="True"/>
+                        </group>
+                        <group string="Filters">
+                            <field name="area_ids" widget="many2many_tags"  placeholder="If empty, it will include all areas." context="{'filter_area' : True}"/>
+                            <field name="company_ids" widget="many2many_tags"  placeholder="If empty, it will include all companies."/>
+                            <field name="branch_ids" domain="[('id','in',default_branch_ids)]" widget="many2many_tags" placeholder="If empty, it will include all branches."/>
+                            <field name="default_branch_ids" widget="many2many_tags" placeholder="If empty, it will include all branches." invisible="1"/>
+                            <field name="description_ids" domain="[('id','in',default_description_ids)]" widget="many2many_tags" placeholder="If empty, it will include all products."/>
+                            <field name="default_description_ids" widget="many2many_tags" placeholder="If empty, it will include all products." invisible="1"/>
+                            <field name="category_ids" widget="many2many_tags"  placeholder="If empty, it will include all product groups."/>
+                            <field name="brand_ids" widget="many2many_tags"  placeholder="If empty, it will include all brands."/>
+                            <field name="usage_ids" widget="many2many_tags"  placeholder="If empty, it will include all usages."/>
+                            <field name="type_ids" widget="many2many_tags"  placeholder="If empty, it will include all sales types."/>
+                            <field name="outlet_ids" widget="many2many_tags"  placeholder="If empty, it will include all outlets."/>
+                            <field name="customer_ids" widget="many2many_tags"  placeholder="If empty, it will include all customer types."/>
+                            <field name="service_ids" widget="many2many_tags"  placeholder="If empty, it will include all service types."/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="generate_tree_view" string="View" type="object" class="btn-primary"/>
+                        <button name="get_sales_dashboard_excel_report" type="object" default_focus="1"
+                                string="Export Excel" class="oe_highlight" icon="fa-download"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_sales_wizard" model="ir.actions.act_window">
+            <field name="name">Sales Wizard</field>
+            <field name="res_model">sales.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

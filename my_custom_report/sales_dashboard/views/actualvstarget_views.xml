@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <record id="actual_vs_target_report_form_views" model="ir.ui.view">
+        <field name="name">Actual vs Target Report form</field>
+        <field name="model">mc.barcode</field>
+        <field name="arch" type="xml">
+             <form string="Actual Reports">
+                    <sheet>
+                        <group>
+                        </group>
+                        <footer>
+                            <button name="get_sales_dashboard_excel_report" type="object" default_focus="1"
+                                string="Export Excel" class="oe_highlight" icon="fa-download"/>
+
+                            <button string="Cancel" special="cancel" class="btn-default"/>
+                        </footer>
+                    </sheet>
+                </form>
+        </field>
+    </record>
+
+    <record id="actual_vs_target_report_action" model="ir.actions.act_window">
+        <field name="name">Actual vs Target Report</field>
+        <field name="res_model">mc.barcode</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="sales_dashboard.actual_vs_target_report_form_views"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

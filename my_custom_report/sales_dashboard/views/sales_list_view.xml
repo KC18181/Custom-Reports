@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="sale_list_both_form_views">
+        <field name="name">Sales List Form</field>
+        <field name="model">sales.list</field>
+        <field name="arch" type="xml">
+            <form string="Actual vs Target Details">
+                <group>
+                    <table border="0" style="width:100%">
+                        <tr>
+                            <td style="font-weight: bold; width: 30%">Group</td>
+                            <td style="width: 20%"><field name="grp"/> </td>
+                        </tr>
+
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))">Actual Last Month [Qty]</td>
+                            <td style="width: 20%"><field name="actual_last_month_qty" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))"/>  </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_value', False) and context.get('show_month', False))">Actual Last Month [PhP]</td>
+                            <td style="width: 20%"><field name="actual_last_month_value" invisible="not (context.get('show_value', False) and context.get('show_month', False))"/>  </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))">Actual This Month [Qty]</td>
+                            <td style="width: 20%"><field name="actual_this_month_qty" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))"/>  </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_value', False) and context.get('show_month', False))">Actual This Month [PhP]</td>
+                            <td style="width: 20%"><field name="actual_this_month_value" invisible="not (context.get('show_value', False) and context.get('show_month', False))"/>  </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))">Target This Month [Qty]</td>
+                            <td style="width: 20%"><field name="target_this_month_qty" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_value', False) and context.get('show_month', False))">Target This Month [PhP]</td>
+                            <td style="width: 20%"><field name="target_this_month_value" invisible="not (context.get('show_value', False) and context.get('show_month', False))"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))">Variance Versus Last Month [Qty]</td>
+                            <td style="width: 20%"><field name="variance_vs_last_month_qty" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_value', False) and context.get('show_month', False))">Variance Versus Last Month [PhP]</td>
+                            <td style="width: 20%"><field name="variance_vs_last_month_value" invisible="not (context.get('show_value', False) and context.get('show_month', False))"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))">Variance Versus Target [Qty]</td>
+                            <td style="width: 20%"><field name="variance_vs_target_qty_month" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_value', False) and context.get('show_month', False))">Variance Versus Target [PhP]</td>
+                            <td style="width: 20%"><field name="variance_vs_target_value_month" invisible="not (context.get('show_value', False) and context.get('show_month', False))"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))">% Actual Versus Target</td>
+                            <td style="width: 20%"><field name="percentage_actual_vs_target_qty_month" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_value', False) and context.get('show_month', False))">% Actual Versus Target</td>
+                            <td style="width: 20%"><field name="percentage_actual_vs_target_value_month" invisible="not (context.get('show_value', False) and context.get('show_month', False))"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))">Actual Last Week [Qty]</td>
+                            <td style="width: 20%"><field name="actual_last_week_qty" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))"/>  </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_value', False) and context.get('show_week', False))">Actual Last Week [PhP]</td>
+                            <td style="width: 20%"><field name="actual_last_week_value" invisible="not (context.get('show_value', False) and context.get('show_week', False))"/>  </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))">Actual This Week [Qty]</td>
+                            <td style="width: 20%"><field name="actual_this_week_qty" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))"/>  </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_value', False) and context.get('show_week', False))">Actual This Week [PhP]</td>
+                            <td style="width: 20%"><field name="actual_this_week_value" invisible="not (context.get('show_value', False) and context.get('show_week', False))"/>  </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))">Target This Week [Qty]</td>
+                            <td style="width: 20%"><field name="target_this_week_qty" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_value', False) and context.get('show_week', False))">Target This Week [PhP]</td>
+                            <td style="width: 20%"><field name="target_this_week_value" invisible="not (context.get('show_value', False) and context.get('show_week', False))"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))">Variance Versus Last Week [Qty]</td>
+                            <td style="width: 20%"><field name="variance_vs_last_week_qty" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_value', False) and context.get('show_week', False))">Variance Versus Last Week [PhP]</td>
+                            <td style="width: 20%"><field name="variance_vs_last_week_value" invisible="not (context.get('show_value', False) and context.get('show_week', False))"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))">Variance Versus Target [Qty]</td>
+                            <td style="width: 20%"><field name="variance_vs_target_qty_week" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_value', False) and context.get('show_week', False))">Variance Versus Target [PhP]</td>
+                            <td style="width: 20%"><field name="variance_vs_target_value_week" invisible="not (context.get('show_value', False) and context.get('show_week', False))"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))">% Actual Versus Target</td>
+                            <td style="width: 20%"><field name="percentage_actual_vs_target_qty_week" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not (context.get('show_value', False) and context.get('show_week', False))">% Actual Versus Target</td>
+                            <td style="width: 20%"><field name="percentage_actual_vs_target_value_week" invisible="not (context.get('show_value', False) and context.get('show_week', False))"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not context.get('show_quantity', False)">Actual YTD [Qty]</td>
+                            <td style="width: 20%"><field name="actual_ytd_qty" invisible="not context.get('show_quantity', False)"/>  </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not context.get('show_value', False)">Actual YTD [PhP]</td>
+                            <td style="width: 20%"><field name="actual_ytd_value" invisible="not context.get('show_value', False)"/>  </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not context.get('show_quantity', False)">Target YTD [Qty]</td>
+                            <td style="width: 20%"><field name="target_ytd_qty" invisible="not context.get('show_quantity', False)"/>  </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not context.get('show_value', False)">Target YTD [PhP]</td>
+                            <td style="width: 20%"><field name="target_ytd_value" invisible="not context.get('show_value', False)"/>  </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not context.get('show_quantity', False)">Variance Versus Target YTD [Qty]</td>
+                            <td style="width: 20%"><field name="variance_vs_target_ytd_qty" invisible="not context.get('show_quantity', False)"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not context.get('show_value', False)">Variance Versus Target YTD [PhP]</td>
+                            <td style="width: 20%"><field name="variance_vs_target_ytd_value" invisible="not context.get('show_value', False)"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not context.get('show_quantity', False)">% YTD Actual Versus Target</td>
+                            <td style="width: 20%"><field name="percentage_ytd_actual_vs_target_qty" invisible="not context.get('show_quantity', False)"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not context.get('show_value', False)">% YTD Actual Versus Target</td>
+                            <td style="width: 20%"><field name="percentage_ytd_actual_vs_target_value" invisible="not context.get('show_value', False)"/> </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not context.get('show_quantity', False)">Actual YTD Last Year [Qty]</td>
+                            <td style="width: 20%"><field name="actual_ytd_last_year_qty" invisible="not context.get('show_quantity', False)"/>  </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; width: 30%" invisible="not context.get('show_value', False)">Actual YTD Last Year [PhP]</td>
+                            <td style="width: 20%"><field name="actual_ytd_last_year_value" invisible="not context.get('show_value', False)"/>  </td>
+                            <td style="width: 50%"/>
+                        </tr>
+                    </table>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="sales_list_tree_both" model="ir.ui.view">
+        <field name="name">sales.list.tree</field>
+        <field name="model">sales.list</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="grp"/>
+                    <field name="actual_last_month_qty" sum="Total" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))"/>
+                <field name="actual_last_week_qty" sum="Total" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))"/>
+                <field name="actual_last_month_value" sum="Total" invisible="not (context.get('show_value', False) and context.get('show_month', False))"/>
+                <field name="actual_last_week_value" sum="Total" invisible="not (context.get('show_value', False) and context.get('show_week', False))"/>
+                <field name="actual_this_month_qty" sum="Total" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))"/>
+                <field name="actual_this_week_qty" sum="Total" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))"/>
+                <field name="actual_this_month_value" sum="Total" invisible="not (context.get('show_value', False) and context.get('show_month', False))"/>
+                <field name="actual_this_week_value" sum="Total" invisible="not (context.get('show_value', False) and context.get('show_week', False))"/>
+                <field name="target_this_month_qty" sum="Total" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))"/>
+                <field name="target_this_week_qty" sum="Total" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))"/>
+                <field name="target_this_month_value" sum="Total" invisible="not (context.get('show_value', False) and context.get('show_month', False))"/>
+                <field name="target_this_week_value" sum="Total" invisible="not (context.get('show_value', False) and context.get('show_week', False))"/>
+                <field name="variance_vs_last_month_qty" sum="Total" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))"/>
+                <field name="variance_vs_last_week_qty" sum="Total" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))"/>
+                <field name="variance_vs_last_month_value" sum="Total" invisible="not (context.get('show_value', False) and context.get('show_month', False))"/>
+                <field name="variance_vs_last_week_value" sum="Total" invisible="not (context.get('show_value', False) and context.get('show_week', False))"/>
+                <field name="variance_vs_target_qty_month" sum="Total" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))"/>
+                <field name="variance_vs_target_qty_week" sum="Total" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))"/>
+                <field name="variance_vs_target_value_month" sum="Total" invisible="not (context.get('show_value', False) and context.get('show_month', False))"/>
+                <field name="variance_vs_target_value_week" sum="Total" invisible="not (context.get('show_value', False) and context.get('show_week', False))"/>
+                <field name="percentage_actual_vs_target_qty_month" avg="Total" invisible="not (context.get('show_quantity', False) and context.get('show_month', False))"/>
+                <field name="percentage_actual_vs_target_qty_week" avg="Total" invisible="not (context.get('show_quantity', False) and context.get('show_week', False))"/>
+                <field name="percentage_actual_vs_target_value_month" avg="Total" invisible="not (context.get('show_value', False) and context.get('show_month', False))"/>
+                <field name="percentage_actual_vs_target_value_week" avg="Total" invisible="not (context.get('show_value', False) and context.get('show_week', False))"/>
+                <field name="actual_ytd_qty" sum="Total" invisible="not context.get('show_quantity', False)"/>
+                <field name="actual_ytd_value" sum="Total" invisible="not context.get('show_value', False)"/>
+                <field name="target_ytd_qty" sum="Total" invisible="not context.get('show_quantity', False)"/>
+                <field name="target_ytd_value" sum="Total" invisible="not context.get('show_value', False)"/>
+                <field name="variance_vs_target_ytd_qty" sum="Total" invisible="not context.get('show_quantity', False)"/>
+                <field name="variance_vs_target_ytd_value" sum="Total" invisible="not context.get('show_value', False)"/>
+                <field name="percentage_ytd_actual_vs_target_qty" avg="Total" invisible="not context.get('show_quantity', False)"/>
+                <field name="percentage_ytd_actual_vs_target_value" avg="Total" invisible="not context.get('show_value', False)"/>
+                <field name="actual_ytd_last_year_qty" sum="Total" invisible="not context.get('show_quantity', False)"/>
+                <field name="actual_ytd_last_year_value" sum="Total" invisible="not context.get('show_value', False)"/>
+                <!-- Add other fields you want to display in the tree view -->
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_list_read" model="ir.ui.view">
+        <field name="name">Read No Create</field>
+        <field name="model">sales.list</field>
+        <field name="inherit_id" ref="sales_list_tree_both"/>
+        <field name="groups_id" eval="[(4, ref('sales_dashboard.sd_read_only'))]"/>
+        <field name="arch" type="xml">
+             <xpath expr="//tree" position="attributes">
+                 <attribute name="create">false</attribute>
+                 <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_list_area" model="ir.ui.view">
+        <field name="name">Area No Create</field>
+        <field name="model">sales.list</field>
+        <field name="inherit_id" ref="sales_list_tree_both"/>
+        <field name="groups_id" eval="[(4, ref('sales_dashboard.sd_area'))]"/>
+        <field name="arch" type="xml">
+             <xpath expr="//tree" position="attributes">
+                 <attribute name="create">false</attribute>
+                 <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_list_branch" model="ir.ui.view">
+        <field name="name">Read No Create</field>
+        <field name="model">sales.list</field>
+        <field name="inherit_id" ref="sales_list_tree_both"/>
+        <field name="groups_id" eval="[(4, ref('sales_dashboard.sd_branch'))]"/>
+        <field name="arch" type="xml">
+             <xpath expr="//tree" position="attributes">
+                 <attribute name="create">false</attribute>
+                 <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_form_read" model="ir.ui.view">
+        <field name="name">Read No Create Form</field>
+        <field name="model">sales.list</field>
+        <field name="inherit_id" ref="sale_list_both_form_views"/>
+        <field name="groups_id" eval="[(4, ref('sales_dashboard.sd_read_only'))]"/>
+        <field name="arch" type="xml">
+             <xpath expr="//form" position="attributes">
+                 <attribute name="create">false</attribute>
+                 <attribute name="delete">false</attribute>
+                 <attribute name="duplicate">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_form_area" model="ir.ui.view">
+        <field name="name">Area No Create Form</field>
+        <field name="model">sales.list</field>
+        <field name="inherit_id" ref="sale_list_both_form_views"/>
+        <field name="groups_id" eval="[(4, ref('sales_dashboard.sd_area'))]"/>
+        <field name="arch" type="xml">
+             <xpath expr="//form" position="attributes">
+                 <attribute name="create">false</attribute>
+                 <attribute name="delete">false</attribute>
+                 <attribute name="duplicate">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_form_branch" model="ir.ui.view">
+        <field name="name">Branch No Create Form</field>
+        <field name="model">sales.list</field>
+        <field name="inherit_id" ref="sale_list_both_form_views"/>
+        <field name="groups_id" eval="[(4, ref('sales_dashboard.sd_branch'))]"/>
+        <field name="arch" type="xml">
+             <xpath expr="//form" position="attributes">
+                 <attribute name="create">false</attribute>
+                 <attribute name="delete">false</attribute>
+                 <attribute name="duplicate">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_my_tree" model="ir.actions.act_window">
+        <field name="name">Sales Performance Report: Actual vs Target</field>
+        <field name="res_model">sales.list</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
