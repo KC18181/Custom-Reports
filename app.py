@@ -114,4 +114,4 @@ def log(message):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=1000, use_reloader=True)
+    app.run(debug=True, port=10000, use_reloader=True)
