@@ -4,22 +4,56 @@ from pymessenger import Bot
 
 app = Flask("My echo bot")
 
-FB_ACCESS_TOKEN = "EAAVOAI9NH3EBOzSrrxuvZAScXbRsbXZA8uTKSOdwEmCMGFanL5oOPYTs0kGnp2pZCZC9vBCCHwcZAHsBMUEln0ZABFMKxH2natLeQb7598JjlVHjsVc3ZATKVuWycKQ8aOlQs1X2Pyu9Lgqw9Qyd5GlRXjvSnbqVGGO9MrepLDsHbYhU19O3HS5ISwZCd7OHNmVZByQZDZD"
+FB_ACCESS_TOKEN = "EAAVOAI9NH3EBO3ZCXz3IZBHdWML5EnlQYIC34ZBCNZAd50zgt2YZCXu2RBoeDZAyFdhI5Xz3QTCbQE9dceKYYNrGxAqvPCQSbKnrHenFsZA9AOTjQhFqUOVZAExkPNMszTMt3YfJZBHZBqsTFZBpSeqhJvf44eZAO3MmxGg3gT2su7g0AjlRpIEF03RGJeIrilcZBvvZCVpKj1Ll1w7ZAE7IC0oIgZDZD"
 bot = Bot(FB_ACCESS_TOKEN)
 
 VERIFICATION_TOKEN = "hello"
 
-# # 🔥 Step 1: Configure the "Get Started" Button
-# def set_get_started_button():
-#     """Send API request to set the 'Get Started' button."""
-#     url = f"https://graph.facebook.com/v12.0/me/messenger_profile?access_token={FB_ACCESS_TOKEN}"
-#     payload = {
-#         "get_started": {
-#             "payload": "{\”type\”:\”legacy_reply_to_message_action\”,\”message\”:\”Get Started\”}"
-#         }
-#     }
-#     response = requests.post(url, json=payload)
-#     print(f"Set Get Started Button: {response.status_code}, {response.json()}")
+# 🛠️ **Step 1: Set Messenger Profile (Get Started, Persistent Menu, Greeting)**
+def set_messenger_profile():
+    """Send API request to configure Messenger Profile."""
+    url = f"https://graph.facebook.com/v12.0/me/messenger_profile?access_token={FB_ACCESS_TOKEN}"
+    payload = {
+        "get_started": {"payload": "get_started_button"},
+        "greeting": [
+            {
+                "locale": "default",
+                "text": "Hello {{user_first_name}}! Welcome to I Tanong mo kay kuya KC chatbot. Tap 'Get Started' to begin."
+            }
+        ],
+        "persistent_menu": [
+            {
+                "locale": "default",
+                "composer_input_disabled": False,
+                "call_to_actions": [
+                    {
+                        "type": "postback",
+                        "title": "View Products",
+                        "payload": "VIEW_PRODUCTS"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "Contact Support",
+                        "payload": "CONTACT_SUPPORT"
+                    },
+                    {
+                        "type": "web_url",
+                        "title": "Visit Website",
+                        "url": "https://example.com",
+                        "webview_height_ratio": "full"
+                    }
+                ]
+            }
+        ]
+    }
+    headers = {'Content-Type': 'application/json'}
+    response = requests.post(url, json=payload, headers=headers)
+    if response.status_code == 200:
+        print(f"Messenger Profile successfully updated: {response.status_code}, {response.json()}")
+    else:
+        print(f"Error updating Messenger Profile: {response.status_code}, {response.text}")
+
+
 
 
 @app.route('/', methods=['GET'])
@@ -45,8 +79,8 @@ def webhook():
                 if messaging_event.get('postback'):
                     payload = messaging_event['postback']['payload']
                     
-                    if payload == "GET_STARTED_PAYLOAD":
-                        welcome_message = "Welcome to I Tanong mo kay kuya KC chatbot! I'm here to help you. You can:\n- Type 'Show Brands' to see available brands.\n- Ask me questions about our products."
+                    if payload == "get_started_button":
+                        welcome_message = "Welcome to our chatbot! I'm here to help you. You can:\n- Type 'Show Brands' to see available brands.\n- Ask me questions about our products."
                         bot.send_text_message(sender_id, welcome_message)
 
                     if payload == "BRAND_APPLE":
@@ -114,4 +148,4 @@ def log(message):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=10000, use_reloader=True)
+    app.run(debug=True, port=8000, use_reloader=True)
